@@ -17,7 +17,7 @@
     <script type="text/javascript" src="js/validation.js"></script> 
   </head> 
   
-  <body class="size-1140">
+  <body class="size-1140" onload="obtener_var()">
     <!-- HEADER -->
     <header role="banner">    
       <!-- Top Bar -->
@@ -217,6 +217,23 @@
     <script type="text/javascript" src="js/responsee.js"></script>
     <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
     <script type="text/javascript" src="js/template-scripts.js"></script>
-     
+    <script>
+      function obtener_var(){
+        if (sessionStorage.getItem('rol_usuario') != 'undefined'){
+
+          console.log(sessionStorage.getItem('rol_usuario'))
+          
+          if (sessionStorage.getItem('rol_usuario')!= 1){
+            alert("Sin permiso")
+            window.location.href = "contact.html"
+          }
+        }else{
+          alert("Con permiso xdd")
+        }
+
+      }
+    </script> 
+
+
    </body>
 </html>

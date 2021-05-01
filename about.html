@@ -164,6 +164,11 @@
         .then(response => {
           if (response.status == 100){
             alert("Todo correcto");
+            sessionStorage.setItem("id_usuario",response.info.id)
+            sessionStorage.setItem("id_usuario",response.info.user_name)
+            if (response.info.rol == 1){
+              window.location.href = "gallery.html"
+            }
           }
           else{
             alert("Hubo un error");

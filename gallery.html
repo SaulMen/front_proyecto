@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prospera Free - New Amazing HTML5 Template</title>
+    <title>UHospital</title>
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/icons.css">
     <link rel="stylesheet" href="css/responsee.css">
@@ -17,7 +17,7 @@
     <script type="text/javascript" src="js/validation.js"></script> 
   </head> 
   
-  <body class="size-1140" onload="obtener_var()">
+  <body class="size-1140" >
     <!-- HEADER -->
     <header role="banner">    
       <!-- Top Bar -->
@@ -69,6 +69,7 @@
           <h1 class="text-white margin-bottom-0 text-size-50 text-thin text-line-height-1">Gallery</h1>
         </header>
         <div class="section background-white"> 
+          
           <div class="line">
             <div class="margin">
               <div class="s-12 m-6 l-3">
@@ -218,20 +219,8 @@
     <script type="text/javascript" src="owl-carousel/owl.carousel.js"></script>
     <script type="text/javascript" src="js/template-scripts.js"></script>
     <script>
-      function obtener_var(){
-        if (sessionStorage.getItem('rol_usuario') != 'undefined'){
-
-          console.log(sessionStorage.getItem('rol_usuario'))
-          
-          if (sessionStorage.getItem('rol_usuario')!= 1){
-            alert("Sin permiso")
-            window.location.href = "contact.html"
-          }
-        }else{
-          alert("Con permiso xdd")
-        }
-
-      }
+      
+      
     </script> 
 
 

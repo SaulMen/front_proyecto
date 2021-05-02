@@ -52,9 +52,6 @@
             <ul class="right chevron">
               <li><a href="index.html">Inicio</a></li>
               <li><a href="about.html">Login</a></li>
-              <li><a href="products.html">About</a></li>
-              <li><a href="gallery.html">Gallery</a></li>
-              <li><a href="contact.html">Contact</a></li>
             </ul>
           </div>
         </div>
@@ -66,51 +63,69 @@
       <!-- Content -->
       <article>
         <header class="section background-primary text-center">
-            <h1 class="text-white margin-bottom-0 text-size-50 text-thin text-line-height-1">UHospital - Inicio de sesión</h1>
-        </header>
+            <h1 class="text-white margin-bottom-0 text-size-50 text-thin text-line-height-1">UHospital - Registro de usuario</h1>
+          </header>
         <div class="section background-white"> 
           <div class="line">
-            <h2 class="text-size-25"><center>Ingrese sus credenciales</center></h2>
+            <h1 class="text-size-35"><center><b>Ingrese sus credenciales</b></center></h1>
             <br>
             <br>
-            <center>
-              <label for="user_name" style="font-size: 20px">Nombre de usuario:</label>
+              <label for="nombre" style="font-size: 20px; display: inline-block;padding-left: 350px;"
+              >Nombre:</label>
+              <input type="text" id="nombre" style="width:300px; height:25px;"
+              placeholder="Ingrese su nombre">
+              <br>
+              <br>
+              <label for="apellido" style="font-size: 20px; display: inline-block;padding-left: 350px;"
+              >Apellido:</label>
+              <input type="text" id="apellido_user" style="width:300px; height:25px"
+              placeholder="Ingrese su apellido">
+              <br>
+              <br>
+              <label for="Fecha de nacimiento" style="font-size: 20px; display: inline-block; padding-left: 350px;"
+              >Fecha de nacimiento:</label>
+              <input type="date" id="fecha_nacimiento">
+              <br>
+              <br>
+              <label for="genero" style="font-size: 20px; display: inline-block;padding-left: 350px;"
+              >Sexo:</label>
+              <select name="generos" id="genero">
+                <option value="hombre">M</option>
+                <option value="mujer">F</option>
+              </select>
+              <br>
+              <br>
+              <label for="user_name" style="font-size: 20px; display: inline-block;padding-left: 350px;"
+              >Nombre de usuario:</label>
               <input type="text" id="user_name" style="width:300px; height:25px"
               placeholder="Ingrese su nombre de usuario">
               <br>
               <br>
-              <label for="user_pass" style="font-size: 20px">Contraseña:</label>
+              <label for="user_pass" style="font-size: 20px ; display: inline-block;padding-left: 350px;"
+              >Contraseña:</label>
               <input type="password" id="user_pass" style="width:300px; height:25px"
               placeholder="Ingrese su contraseña">
               <br>
               <br>
-              <button id="btn_ingresar" style="padding: 5px;font-size: 15px ;width:125px" onclick="login()"
-              >Ingresar</button>
-              <button id="btn_registrarse" style="padding: 5px;font-size: 15px ;width:125px" 
-              onclick="location.href='register.html';">Registrarse</button>
-            </center>
-            <blockquote class="margin-top-bottom-20">
-              Mirum.
-            </blockquote>
+              <label for="user_pass" style="font-size: 20px; display: inline-block;padding-left: 350px;"
+              >Confirmar contraseña:</label>
+              <input type="password" id="user_pass2" style="width:300px; height:25px"
+              placeholder="Ingrese nuevamente su contraseña">
+              <br>
+              <br>
+              <label for="telefono" style="font-size: 20px; display: inline-block;padding-left: 350px;"
+              >Número de teléfono:</label>
+              <input type="text" id="telefono_user" style="width:200px; height:25px"
+              placeholder="Ingrese su número de telefono">
+              <br>
+              <br>
+              <center>
+                <button id="btn_registrarse" style="padding: 5px;font-size: 15px ;width:125px" 
+              onclick="registro()">Registrarse</button>
+              </center>
             <p class="margin-bottom-30">
-            Nam .
+             
             </p>
-            <div class="line">
-              <div class="margin">
-                <div class="s-12 m-12 l-6 margin-m-bottom-30">
-                  <h2>Mirum </h2>
-                  <p>
-                  Typi.
-                  </p>
-                </div>
-                <div class="s-12 m-12 l-6">
-                  <h2>Claritas</h2>
-                  <p>
-                  Typi.
-                  </p>
-                </div>
-              </div>  
-            </div>
           </div>
         </div> 
       </article>
@@ -138,43 +153,45 @@
     <script type="text/javascript" src="js/template-scripts.js"></script>
      
     <script>
-      function login(){
+      function registro(){
         var user_name = document.getElementById("user_name").value;
         var user_pass = document.getElementById("user_pass").value;
+        var nombre = document.getElementById("nombre").value;
+        var user_pass2 = document.getElementById("user_pass2").value;
 
-        fetch('http://localhost:5001/inicio-sesion',{
-          method: 'POST',
-          headers:{
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            "user_name": user_name,
-            "user_pass": user_pass
+        if (user_pass == user_pass2){
+          fetch('http://localhost:5001/usuario_crear',{
+            method: 'POST',
+            headers:{
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              "user_name": user_name,
+              "user_pass": user_pass,
+              "nombre": nombre
+            })
           })
-        })
-        .then(res => res.json())
-        .then(response => {
-          if (response.status == 100){
-            alert("Todo correcto");
-            sessionStorage.setItem("id_usuario",response.info.id)
-            sessionStorage.setItem("user_name",response.info.user_name)
-            sessionStorage.setItem('rol_usuario', response.info.rol)
-            if (response.info.rol == 1 ){
-              window.location.href = "modulo-admin.html"
+          .then(res => res.json())
+          .then(response => {
+            if (response.status == 100){
 
-            }else if(response.info.rol == 2){
-              window.location.href = "gallery.html"
+              alert("Se creó correctamente");
+              window.location.href = "about.html"
+
             }
-          }
-          else{
-            alert("Hubo un error");
-          }
-        })
-        .catch(err => {
-          console.log.err();
-        })
-      }
 
+            else{
+              alert("Hubo un error");
+            }
+          })
+          .catch(err => {
+            console.log.err();
+            alert("Error en el server")
+          })
+      }else{
+        alert("Contraseña incorrecta")
+      }
+      }
     </script>
 
    </body>

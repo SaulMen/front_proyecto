@@ -17,7 +17,7 @@
     <script type="text/javascript" src="js/validation.js"></script> 
   </head>  
   
-  <body class="size-1140">
+  <body class="size-1140" onload="obtener_var()">
     <!-- HEADER -->
     <header role="banner">    
       <!-- Top Bar -->
@@ -26,6 +26,7 @@
           <div class="s-12 m-6 l-6">
             <div class="top-bar-contact">
               <p class="text-size-12">Contáctenos: +502 0000 0000 | <a class="text-orange-hover" href="index.html">contacto@uhospital.com</a></p>
+              <button onclick="cerrar_sesion()">Cerrar sesión</button>
             </div>
           </div>
           <div class="s-12 m-6 l-6">
@@ -50,11 +51,12 @@
           <div class="top-nav s-12 l-10">
             <p class="nav-text"></p>
             <ul class="right chevron">
-              <li><a href="index.html">Inicio</a></li>
-              <li><a href="about.html">Login</a></li>
-              <li><a href="products.html">About</a></li>
-              <li><a href="gallery.html">Gallery</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="modulo-admin.html">Principal</a></li>
+              <li><a href="carga.html">Carga</a></li>
+              <li><a href="pacientes-admin.html">Pacientes</a></li>
+              <li><a href="doctores-admin.html">Doctores</a></li>
+              <li><a href="enfermeras-admin.html">Enfermeras</a></li>
+              <li><a href="medicamentos-admin.html">Medicamentos</a></li>
             </ul>
           </div>
         </div>
@@ -66,45 +68,15 @@
       <!-- Content -->
       <article>
         <header class="section background-primary text-center">
-            <h1 class="text-white margin-bottom-0 text-size-50 text-thin text-line-height-1">UHospital - Inicio de sesión</h1>
-        </header>
+            <h1 class="text-white margin-bottom-0 text-size-50 text-thin text-line-height-1">UHospital - Doctores</h1>
+          </header>
         <div class="section background-white"> 
           <div class="line">
-            <h2 class="text-size-25"><center>Ingrese sus credenciales</center></h2>
-            <br>
-            <br>
-            <center>
-              <label for="user_name" style="font-size: 20px">Nombre de usuario:</label>
-              <input type="text" id="user_name" style="width:300px; height:25px"
-              placeholder="Ingrese su nombre de usuario">
-              <br>
-              <br>
-              <label for="user_pass" style="font-size: 20px">Contraseña:</label>
-              <input type="password" id="user_pass" style="width:300px; height:25px"
-              placeholder="Ingrese su contraseña">
-              <br>
-              <br>
-              <button id="btn_ingresar" style="padding: 5px;font-size: 15px ;width:125px" onclick="login()"
-              >Ingresar</button>
-              <button id="btn_registrarse" style="padding: 5px;font-size: 15px ;width:125px" 
-              onclick="location.href='register.html';">Registrarse</button>
-            </center>
+            
+
             <p class="margin-bottom-30">
+             
             </p>
-            <div class="line">
-              <div class="margin">
-                <div class="s-12 m-12 l-6 margin-m-bottom-30">
-                  <h2></h2>
-                  <p>
-                  </p>
-                </div>
-                <div class="s-12 m-12 l-6">
-                  <h2></h2>
-                  <p>
-                  </p>
-                </div>
-              </div>  
-            </div>
           </div>
         </div> 
       </article>
@@ -132,51 +104,28 @@
     <script type="text/javascript" src="js/template-scripts.js"></script>
      
     <script>
-      function login(){
-        var user_name = document.getElementById("user_name").value;
-        var user_pass = document.getElementById("user_pass").value;
+      function obtener_var(){
+        if (sessionStorage.getItem('rol_usuario') != null){
 
-        fetch('http://localhost:5001/inicio-sesion',{
-          method: 'POST',
-          headers:{
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            "user_name": user_name,
-            "user_pass": user_pass
-          })
-        })
-        .then(res => res.json())
-        .then(response => {
-          if (response.status == 100){
-            alert("Todo correcto");
-            sessionStorage.setItem("id_usuario",response.info.id)
-            sessionStorage.setItem("user_name",response.info.user_name)
-            sessionStorage.setItem('rol_usuario', response.info.rol)
-            console.log(response.info.rol)
-            if (response.info.rol == 1 ){
-              window.location.href = "modulo-admin.html"
-
-            }else if(response.info.rol == 2){
-              window.location.href = "gallery.html"
-            
-            }else if(response.info.rol == 3){
-              window.location.href = "modulo-doctor.html"
-
-            }else if(response.info.rol == 4){
-
-            }
-
+          console.log(sessionStorage.getItem('rol_usuario'))
+          
+          if (sessionStorage.getItem('rol_usuario') != 1){
+            alert("Sin permiso, usted no es administrador")
+            window.location.href = "about.html"
           }
-          else{
-            alert("Hubo un error");
-          }
-        })
-        .catch(err => {
-          console.log.err();
-        })
+
+        }else{
+          alert("No ha inciado sesión")
+          window.location.href = "about.html"
+        }
+
       }
-
+      function cerrar_sesion(){
+        sessionStorage.removeItem("rol_usuario")
+        sessionStorage.removeItem("id_usuario")
+        sessionStorage.removeItem("user_name")
+        window.location.href = "about.html"
+      }
     </script>
 
    </body>

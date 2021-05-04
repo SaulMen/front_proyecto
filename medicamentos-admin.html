@@ -14,7 +14,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>    
-    <script type="text/javascript" src="js/validation.js"></script> 
+    <script type="text/javascript" src="js/validation.js"></script>
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script> 
   </head>  
   
   <body class="size-1140" onload="obtener_var()">
@@ -72,7 +73,24 @@
           </header>
         <div class="section background-white"> 
           <div class="line">
+            <table class="default " style="background-color: rgb(141, 202, 189);" id="tabla">
+
+              <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+              </thead>
             
+              <tbody id="body_table">
+              </tbody>
+            
+            </table>
+
+            <center><button onclick="generatepdf()" style="background-color: rgb(141, 202, 189);">
+              Descargar PDF</button></center>
 
             <p class="margin-bottom-30">
              
@@ -119,6 +137,33 @@
           window.location.href = "about.html"
         }
 
+        fetch('http://localhost:5001/obtener_medicamentos', {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(res => res.json())
+        .then(response => {
+          //Usar esto en caso de tener en json en string
+          //data = JSON.parse(response.info) e imprimir "data"
+          data = response.info
+          console.log(data);
+          var body_table = document.getElementById("body_table")
+
+          data.forEach(mdct => {
+            body_table.innerHTML +=`  <tr>
+                                        <td>${mdct['id']}</td>
+                                        <td>${mdct['nombre']}</td>
+                                        <td>${mdct['precio']}</td>
+                                        <td>${mdct['cantidad']}</td>
+                                      </tr><button id="${mdct['id']}" onclick="eliminar(this)">Eliminar</button>`
+          
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          alert("ocurrió un error")
+        })
       }
       function cerrar_sesion(){
         sessionStorage.removeItem("rol_usuario")
@@ -126,6 +171,44 @@
         sessionStorage.removeItem("user_name")
         window.location.href = "about.html"
       }
+    </script>
+
+    <script>
+      function generatepdf(){
+        const element = document.getElementById("tabla");
+        html2pdf()
+        .from(element)
+        .save();
+      }
+    </script>
+
+    <script>
+      function eliminar(compo){
+            var id1 = compo.id;
+            console.log(id1);
+            
+            fetch('http://localhost:5001/eliminar_medicamento',{
+              method: 'POST',
+              headers:{
+                'Content-Type': 'application/json'
+              },
+                body: JSON.stringify({
+                "id": parseInt(id1)
+              })
+            })
+            .then(res => res.json())
+            .then(response => {
+              if (response.status == 100){
+                alert("Se eliminó")
+                //sessionStorage.setItem("id_usuario",response.info.id)
+              }
+            })
+          
+            .catch(err => {
+              console.log.err();
+            })
+
+          }
     </script>
 
    </body>

@@ -189,9 +189,10 @@
                 })
                 .then(res => res.json())
                 .then(response => {
+                  setTimeout(() => { console.log("pausa"); }, 800);
                   if (response.status == 100){
-
-                    alert("Se cargaron correctamente");
+                    
+                    console.log("creado correctamente");
 
                   }
 
@@ -256,7 +257,7 @@
                 .then(res => res.json())
                 .then(response => {
                   if (response.status == 100){
-                    console.log("creado correctamente");
+                    console.log("Creado correctamente");
                     
                   }else{
                     alert("Hubo un error");

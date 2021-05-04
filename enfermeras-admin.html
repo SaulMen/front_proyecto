@@ -137,7 +137,7 @@
           window.location.href = "about.html"
         }
 
-        fetch('http://localhost:5001/obtener_enfermeras', {
+        fetch('https://sesion11.herokuapp.com/obtener_enfermeras', {
           method: "GET",
           headers: {
             'Content-Type': 'application/json'
@@ -186,7 +186,7 @@
             var id1 = compo.id;
             console.log(id1);
             
-            fetch('http://localhost:5001/eliminar_enfermera',{
+            fetch('https://sesion11.herokuapp.com/eliminar_enfermera',{
               method: 'POST',
               headers:{
                 'Content-Type': 'application/json'

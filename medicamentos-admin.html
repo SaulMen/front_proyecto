@@ -137,7 +137,7 @@
           window.location.href = "about.html"
         }
 
-        fetch('http://localhost:5001/obtener_medicamentos', {
+        fetch('https://sesion11.herokuapp.com/obtener_medicamentos', {
           method: "GET",
           headers: {
             'Content-Type': 'application/json'
@@ -187,7 +187,7 @@
             var id1 = compo.id;
             console.log(id1);
             
-            fetch('http://localhost:5001/eliminar_medicamento',{
+            fetch('https://sesion11.herokuapp.com/eliminar_medicamento',{
               method: 'POST',
               headers:{
                 'Content-Type': 'application/json'

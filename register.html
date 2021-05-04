@@ -160,7 +160,7 @@
         var user_pass2 = document.getElementById("user_pass2").value;
 
         if (user_pass == user_pass2){
-          fetch('http://localhost:5001/usuario_crear',{
+          fetch('https://sesion11.herokuapp.com/usuario_crear',{
             method: 'POST',
             headers:{
               'Content-Type': 'application/json'

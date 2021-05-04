@@ -176,7 +176,7 @@
                 var user_pass = usuario[5];
                 var nombre = usuario[0];
                 console.log(user_name + " " + user_pass + " " + nombre);
-                fetch('http://localhost:5001/usuario_crear',{
+                fetch('https://sesion11.herokuapp.com/usuario_crear',{
                   method: 'POST',
                   headers:{
                     'Content-Type': 'application/json'
@@ -238,7 +238,7 @@
                 var especialidad = doctor[6];
                 var tel = doctor[7];
                 console.log(doctor);
-                fetch('http://localhost:5001/doctor_crear',{
+                fetch('https://sesion11.herokuapp.com/doctor_crear',{
                   method: 'POST',
                   headers:{
                     'Content-Type': 'application/json'
@@ -301,7 +301,7 @@
                 var user_pass = enfermera[5];
                 var tel = enfermera[6];
                 console.log(enfermera);
-                fetch('http://localhost:5001/enfermera_crear',{
+                fetch('https://sesion11.herokuapp.com/enfermera_crear',{
                   method: 'POST',
                   headers:{
                     'Content-Type': 'application/json'
@@ -360,7 +360,7 @@
                 var descripcion = medicamento[2];
                 var cantidad = medicamento[3];
                 console.log(medicamento);
-                fetch('http://localhost:5001/medicamento_crear',{
+                fetch('https://sesion11.herokuapp.com/medicamento_crear',{
                   method: 'POST',
                   headers:{
                     'Content-Type': 'application/json'

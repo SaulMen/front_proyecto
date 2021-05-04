@@ -138,7 +138,7 @@
           window.location.href = "about.html"
         }
 
-        fetch('http://localhost:5001/obtener_usuarios', {
+        fetch('https://sesion11.herokuapp.com/obtener_usuarios', {
           method: "GET",
           headers: {
             'Content-Type': 'application/json'
@@ -191,7 +191,7 @@
         var id = compo.id;
         console.log(id);
         
-        fetch('http://localhost:5001/obtener_un_usuario',{
+        fetch('https://sesion11.herokuapp.com/obtener_un_usuario',{
           method: 'POST',
           headers:{
             'Content-Type': 'application/json'
@@ -218,7 +218,7 @@
         var id1 = compo.id;
         console.log(id1);
         
-        fetch('http://localhost:5001/eliminar_usuario',{
+        fetch('https://sesion11.herokuapp.com/eliminar_usuario',{
           method: 'POST',
           headers:{
             'Content-Type': 'application/json'
